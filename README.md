@@ -61,9 +61,9 @@ Default: `config.getAll(onlyParsed=false): {[key: string]: string}`
 
 Return all defined keys and values as a key value object (from process.env and .env merged), or only from .env if onlyParsed is set to true.
 
-#### getAllPublic
+#### getPublic
 
-Default: `config.getAllPublic(onlyParsed=false): {[key: string]: string}`
+Default: `config.getPublic(onlyParsed=false): {[key: string]: string}`
 
 Return all defined public (envs. vars that the prefix `PUBLIC_`) keys and values as a key value object (from process.env and .env merged), or only from .env if onlyParsed is set to true.
 
