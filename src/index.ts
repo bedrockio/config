@@ -85,12 +85,24 @@ export function getAll(onlyParsed = false): { [key: string]: string } {
   return result;
 }
 
-export function getAllPublic(onlyParsed = false): { [key: string]: string } {
+export function getPublic(onlyParsed = false): { [key: string]: string } {
   const result: { [key: string]: string } = {};
+
+  const publicPrefixes = resolvePublicPrefixes();
+
   const keys = parsed.keys();
+
   for (const key of keys) {
-    if (!key.startsWith('PUBLIC_')) continue;
+    const isPublic = publicPrefixes.some((prefix) => {
+      return key.startsWith(prefix);
+    });
+
+    if (!isPublic) {
+      continue;
+    }
+
     const value = onlyParsed ? parsed.get(key) : process.env[key] || parsed.get(key);
+
     result[key] = value;
   }
   return result;
@@ -103,6 +115,16 @@ export function has(variable: string): boolean {
 export default {
   get,
   getAll,
-  getAllPublic,
+  getPublic,
   has,
 };
+
+function resolvePublicPrefixes() {
+  const { ENV_PUBLIC_PREFIXES } = process.env;
+
+  if (ENV_PUBLIC_PREFIXES) {
+    return ENV_PUBLIC_PREFIXES.split(',');
+  } else {
+    return ['APP_', 'PUBLIC_'];
+  }
+}
