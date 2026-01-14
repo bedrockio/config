@@ -22,13 +22,13 @@
   },
   "scripts": {
     "cleanup": "rm -rf lib && rm -rf types",
-    "prebuild": "npm run cleanup",
+    "prebuild": "yarn cleanup",
     "build": "tsc",
-    "test": "npm run build && node --test",
-    "prerelease": "npm run build"
+    "test": "yarn build && node --test",
+    "prerelease": "yarn build"
   },
   "devDependencies": {
-    "@types/node": "^14.11.10",
+    "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "eslint": "^8.42.0",
@@ -41,10 +41,8 @@
     "arrowParens": "always",
     "printWidth": 120
   },
-  "jest": {
-    "verbose": true,
-    "testMatch": [
-      "<rootDir>/lib/**/__tests__/**/*.js"
-    ]
+  "volta": {
+    "node": "24.13.0",
+    "yarn": "1.22.22"
   }
 }

@@ -6,7 +6,7 @@ const { it, describe } = require('node:test');
 process.env.ENV_CONFIG_PATH = path.join(__dirname, '../../fixtures/.env');
 
 console.log(process.env.ENV_CONFIG_PATH);
-const { getAll, get, has, getAllPublic } = require('../../lib/index');
+const { getAll, get, has, getPublic } = require('../../lib/index');
 
 describe('getAll', () => {
   it('confirm that all keys are returned', () => {
@@ -16,9 +16,9 @@ describe('getAll', () => {
   });
 });
 
-describe('getAllPublic', () => {
+describe('getPublic', () => {
   it('confirm that all safe keys are returned', () => {
-    const all = getAllPublic();
+    const all = getPublic();
     assert.equal(Object.keys(all).length, 1);
     assert.equal(all.PUBLIC_APP_NAME_NOT_IMPORTANT, 'Bedrock Config');
   });
@@ -41,7 +41,7 @@ describe('get', () => {
   it('not defined key', () => {
     assert.throws(() => get('BAD_VALUE'), {
       message:
-        'Configuration variable "BAD_VALUE" is not exposed as enviroment variable nor was a default provided in `.env`',
+        'Configuration variable "BAD_VALUE" is not exposed as environment variable nor was a default provided in `.env`',
     });
   });
 

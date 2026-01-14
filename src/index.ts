@@ -97,7 +97,7 @@ export function getPublic(onlyParsed = false): { [key: string]: string } {
       return key.startsWith(prefix);
     });
 
-    if (isPublic) {
+    if (!isPublic) {
       continue;
     }
 
